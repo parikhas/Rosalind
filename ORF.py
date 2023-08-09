@@ -1,52 +1,28 @@
 """Problem
-After identifying the exons and introns of an RNA string, we only need to delete the introns and concatenate the exons to form a new string ready for translation.
+Either strand of a DNA double helix can serve as the coding strand for RNA transcription. Hence, a given DNA string implies six total reading frames, or ways in which the same region of DNA can be translated into amino acids: three reading frames result from reading the string itself, whereas three more result from reading its reverse complement.
+
+An open reading frame (ORF) is one which starts from the start codon and ends by stop codon, without any other stop codons in between. Thus, a candidate protein string is derived by translating an open reading frame into amino acids until a stop codon is reached.
 
 Given: A DNA string s
- (of length at most 1 kbp) and a collection of substrings of s
- acting as introns. All strings are given in FASTA format.
+ of length at most 1 kbp in FASTA format.
 
-Return: A protein string resulting from transcribing and translating the exons of s
-. (Note: Only one solution will exist for the dataset provided.)
+Return: Every distinct candidate protein string that can be translated from ORFs of s
+. Strings can be returned in any order.
 """
-def removeIntrons(fastafile):
-    """Remove intron sequences from dna sequence
 
-    Args:
-        fastafile (file): .fasta file
-
-    Returns:
-        sequence(str): DNA string with introns removed
-    """
-    sequence = ""
-    intron_seq = ""
-    string_num = 0
-    with open(fastafile,"r") as f1:
+def parse_fasta(fasta):
+    dna = ""
+    with open(fasta,"r") as f1:
         for line in f1:
             line = line.strip()
-            if line.startswith(">"):
-                if sequence != "":
-                    if intron_seq != "":
-                        sequence = sequence.replace(intron_seq,"")
-                        intron_seq = ""
-                string_num += 1
-
-            else:
-                if string_num == 1:
-                    sequence += line
-                else:
-                    intron_seq += line
-    sequence = sequence.replace(intron_seq,"")
-    return sequence
-
-def protFromExons(sequence):
-    """Convert dna sequence to amino acid sequence
-
-    Args:
-        sequence (str): DNA sequence
-
-    Returns:
-        amino acid sequnece (str): Amino acid sequence
-    """
+            if not line.startswith(">"):
+                dna += line
+    return dna
+    
+def amino_acid_from_dna(dna):
+    # print(dna)
+    amino_acid = ""
+    translated_protein = []
     dna_codon = {
         'TCA' : 'S',    # Serine
         'TCC' : 'S',    # Serine
@@ -112,18 +88,23 @@ def protFromExons(sequence):
         'GGC' : 'G',    # Glycine
         'GGG' : 'G',    # Glycine
         'GGT' : 'G',    # Glycine
-        }
-    prot_seq = ""
-    for i in range(0,len(sequence)-2,3):
-        amino_acid = dna_codon[sequence[i:i+3]]
-        if amino_acid != "Stop":
-            prot_seq += amino_acid
-    print(prot_seq)
+        }    
+    print(dna)
+    for i in range(0,len(dna)-2,3):
+        codon = dna[i:i+3]
+        amino_acid += dna_codon[codon]
+    print(amino_acid)
+    prot = amino_acid.split("Stop")
+    print(prot)
+    for p in prot:
+        for i in range(len(p)):
+            if p[i] == "M":
+                translated_protein.append(p[i:])
+                break
+    print(translated_protein)
 
 if __name__ == "__main__":
-    seq = removeIntrons("rosalind_splc.txt")
-    protFromExons(seq)
+    dna = parse_fasta("orf.txt")
+    amino_acid_from_dna(dna)
 
-
-
-
+    

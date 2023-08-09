@@ -46,4 +46,8 @@ def protFromRNA(sequence):
     print(protein_sequence) 
 
 if __name__ == "__main__":
-    protFromRNA("AUGGCCAUGGCGCCCAGAACUGAGAUCAAUAGUACCCGUAUUAACGGGUGA")
+    with open("rosalind_prot.txt","r") as f1:
+        for line in f1:
+            line = line.strip()
+            sequence = line
+    protFromRNA(sequence)
