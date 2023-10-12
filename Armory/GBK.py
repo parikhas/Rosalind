@@ -1,4 +1,8 @@
-"""Problem
+"""
+GenBank Introduction
+
+URL: https://rosalind.info/problems/gbk/
+
 GenBank comprises several subdivisions:
 
 Nucleotide: a collection of nucleic acid sequences from several sources.
@@ -6,6 +10,7 @@ Genome Survey Sequence (GSS): uncharacterized short genomic sequences.
 Expressed Sequence Tags, (EST): uncharacterized short cDNA sequences.
 
 Given: A genus name, followed by two dates in YYYY/M/D format.
+
 Return: The number of Nucleotide GenBank entries for the given genus that were published between the dates specified.
 """
 

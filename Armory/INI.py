@@ -1,6 +1,10 @@
 """
-Problem
+Introduction to the Bioinformatics Armory
+
+URL: https://rosalind.info/problems/ini/
+
 Given: A DNA string s of length at most 1000 bp.
+
 Return: Four integers (separated by spaces) representing the respective number of times that the symbols 'A', 'C', 'G', and 'T' occur in s
 """
 
