@@ -12,15 +12,14 @@ Given: At most 10 DNA strings in FASTA format (of length at most 1 kbp each).
 Return: The ID of the string having the highest GC-content, followed by the GC-content of that string. Rosalind allows for a default error of 0.001 in all decimal answers unless otherwise stated; please see the note on absolute error below.
 """
 
-gc_DNA = {}
-
-def getGCFromFASTA(fastaFile,gc_DNA):
+def getGCFromFASTA(fastaFile):
     """Get GC content for each string in the fast a file and add it to a dict
 
     Args:
         fastaFile (.fasta file): FASTA file
         gc_DNA (dict): Dict where GC content will be stored
     """
+    gc_DNA = {}
     sequence = ""
     with open(fastaFile,"r") as f1:
         for line in f1:
@@ -34,6 +33,7 @@ def getGCFromFASTA(fastaFile,gc_DNA):
             else:
                 sequence += line
     addGCToDict(sequence,gc_DNA,header)  
+    return gc_DNA
 
 def getMaxGC(gc_DNA):
     """Get DNA sting with max GC percentage
@@ -57,6 +57,6 @@ def addGCToDict(seq,gc_DNA,header):
     gc_DNA[header] = gc_percent
 
 if __name__ == "__main__":
-    getGCFromFASTA("gc.fasta",gc_DNA)
-    getMaxGC(gc_DNA)
+    gc_hash = getGCFromFASTA("data/gc.fasta")
+    getMaxGC(gc_hash)
 

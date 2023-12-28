@@ -28,3 +28,7 @@ def reverseComplementString(DNA):
     
 if __name__ == "__main__":
     reverseComplementString("AAAACCCGGT")
+
+
+            
+

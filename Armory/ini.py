@@ -10,18 +10,12 @@ Return: Four integers (separated by spaces) representing the respective number o
 
 from Bio.Seq import Seq
 
-def base_counts(sequence):
-    """Generate and print counts of A, C, G and T in a given sequenc
-
-    Args:
-        sequence (string): DNA sequence
-    """
+def base_count(sequence):
     my_seq = Seq(sequence)
-    print(my_seq.count("A"), my_seq.count("C"), my_seq.count("G"), my_seq.count("T"))
+    print("Count of A:", my_seq.count("A"))
 
 if __name__ == "__main__":
-    with open("data/rosalind_ini.txt","r") as f1:
-        seq = f1.readline().strip()
-        base_counts(seq)
-
-
+    f1 = open("data/rosalind_ini.txt", "r")
+    seq = f1.readline().strip()
+    base_count(seq)
+    f1.close()

@@ -122,7 +122,7 @@ def protFromExons(sequence):
     print(prot_seq)
 
 if __name__ == "__main__":
-    seq = removeIntrons("rosalind_splc.txt")
+    seq = removeIntrons("data/rosalind_splc.txt")
     protFromExons(seq)
 
 

@@ -24,13 +24,8 @@ def subsequence_index(string1,string2):
         if len(string2_l) > 0:
             if string1[i] == string2_l[0]:
                 string_idx = i + 1
-                if sub_idx:
-                    if string_idx > sub_idx[-1]:
-                        sub_idx.append(string_idx)
-                        del string2_l[0]
-                else:
-                    sub_idx.append(string_idx)
-                    del string2_l[0]
+                sub_idx.append(string_idx)
+                del string2_l[0]
         else:
             break
 
@@ -61,7 +56,7 @@ def get_strings_from_fasta(fasta):
     return (s1,s2)
 
 if __name__ == "__main__":
-    string1,string2 = get_strings_from_fasta("rosalind_sseq.txt")
+    string1,string2 = get_strings_from_fasta("data/rosalind_sseq.txt")
     subsequence_index(string1,string2)
 
                 
